@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Польский язык — Виды глагола</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0e;
+    --surface: #161618;
+    --surface2: #1e1e21;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #e8e6df;
+    --muted: #7a7870;
+    --ndk: #4a9eff;
+    --ndk-bg: rgba(74,158,255,0.08);
+    --ndk-border: rgba(74,158,255,0.22);
+    --dk: #3ecf8e;
+    --dk-bg: rgba(62,207,142,0.08);
+    --dk-border: rgba(62,207,142,0.22);
+    --accent: #f0c040;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    border-bottom: 1px solid var(--border);
+    padding: 72px 40px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero::before {
+    content: 'PL';
+    position: absolute;
+    top: 40px; right: 40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1.08;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--muted);
+    margin-top: 16px;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .hero-badges {
+    display: flex;
+    gap: 10px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 3px;
+    border: 1px solid;
+    letter-spacing: 0.05em;
+  }
+  .badge-ndk { color: var(--ndk); border-color: var(--ndk-border); background: var(--ndk-bg); }
+  .badge-dk  { color: var(--dk);  border-color: var(--dk-border);  background: var(--dk-bg);  }
+  .badge-cnt { color: var(--muted); border-color: var(--border2); }
+
+  /* ── THEORY ── */
+  .theory {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .theory-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  @media(max-width:640px){ .theory-grid { grid-template-columns: 1fr; } }
+  .theory-card {
+    border-radius: 8px;
+    padding: 22px 24px;
+    border: 1px solid;
+  }
+  .theory-card.t-ndk { border-color: var(--ndk-border); background: var(--ndk-bg); }
+  .theory-card.t-dk  { border-color: var(--dk-border);  background: var(--dk-bg);  }
+  .theory-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .t-ndk h3 { color: var(--ndk); }
+  .t-dk  h3 { color: var(--dk); }
+  .theory-card .pl-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .t-ndk .pl-name { color: rgba(74,158,255,0.6); }
+  .t-dk  .pl-name { color: rgba(62,207,142,0.6); }
+  .theory-card ul {
+    list-style: none;
+    font-size: 13.5px;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+  .theory-card ul li::before { content: '— '; }
+
+  .formation-block {
+    margin-top: 32px;
+    padding: 22px 24px;
+    background: var(--surface);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .formation-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .formation-ways {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 12px;
+  }
+  @media(max-width:640px){ .formation-ways { grid-template-columns: 1fr; } }
+  .fway {
+    background: var(--surface2);
+    border-radius: 6px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+  }
+  .fway-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .fway-ex {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .fway-ex span { color: var(--muted); font-size: 12px; }
+
+  /* ── TOOLBAR ── */
+  .toolbar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 40px 0;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .search-wrap {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+  }
+  .search-wrap input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 10px 14px 10px 38px;
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-wrap::before {
+    content: '⌕';
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 16px;
+    pointer-events: none;
+  }
+  .filter-btns { display: flex; gap: 6px; }
+  .filter-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    padding: 8px 14px;
+    border-radius: 5px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: rgba(240,192,64,0.1); border-color: var(--accent); color: var(--accent); }
+  .count-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    padding: 0 40px;
+  }
+  .col-headers {
+    display: grid;
+    grid-template-columns: 28px 1fr 1fr 1fr;
+    gap: 0;
+    padding: 0 0 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .col-h {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding: 0 12px;
+  }
+  .col-h:first-child { padding-left: 0; }
+
+  .verb-row {
+    display: grid;
+    grid-template-columns: 28px 1fr 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+  }
+  .verb-row:hover { background: var(--surface); }
+  .verb-row.expanded { background: var(--surface); }
+
+  .row-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.18);
+    padding: 14px 0;
+    align-self: center;
+  }
+  .cell {
+    padding: 14px 12px;
+  }
+  .cell-ndk .word {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ndk);
+  }
+  .cell-dk .word {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--dk);
+  }
+  .cell .trans {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+    font-weight: 300;
+  }
+  .cell-type .type-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+  .tag-prefix { background: rgba(240,192,64,0.1); color: var(--accent); }
+  .tag-suffix { background: rgba(167,139,250,0.1); color: #a78bfa; }
+    .tag-suppl  { background: rgba(251,113,133,0.1); color: #fb7185; }
+  .cell-type .tip {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* expanded examples */
+  .examples-row {
+    display: none;
+    grid-column: 1 / -1;
+    padding: 0 12px 18px 28px;
+  }
+  .verb-row.expanded .examples-row { display: block; }
+  .ex-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  @media(max-width:640px){ .ex-pair { grid-template-columns: 1fr; } }
+  .ex-card {
+    border-radius: 6px;
+    padding: 12px 14px;
+    border: 1px solid;
+  }
+  .ex-card.ex-ndk { border-color: var(--ndk-border); background: var(--ndk-bg); }
+  .ex-card.ex-dk  { border-color: var(--dk-border);  background: var(--dk-bg);  }
+  .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .ex-ndk .ex-label { color: var(--ndk); }
+  .ex-dk  .ex-label { color: var(--dk); }
+  .ex-pl { font-size: 14px; color: var(--text); margin-bottom: 3px; font-style: italic; }
+  .ex-ru { font-size: 12px; color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: 1100px;
+    margin: 60px auto 0;
+    padding: 28px 40px;
+    border-top: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* section heading */
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 0;
+  }
+
+  @media(max-width:700px){
+    .hero, .theory, .toolbar, .table-wrap { padding-left: 18px; padding-right: 18px; }
+    .col-headers, .verb-row { grid-template-columns: 24px 1fr 1fr; }
+    .cell-type { display: none; }
+    .col-h:last-child { display: none; }
+  }
+
+  /* no results */
+  .no-results {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--muted);
+    font-size: 14px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Польский язык · Gramatyka</div>
+  <h1>Виды глагола<br><em>Aspekty czasowników</em></h1>
+  <p class="hero-sub">Совершенный и несовершенный вид — ключевая грамматическая категория польского. 100 пар с переводом и живыми примерами. Нажмите на любую строку, чтобы увидеть предложения.</p>
+  <div class="hero-badges">
+    <span class="badge badge-ndk">Niedokonany · несовершенный</span>
+    <span class="badge badge-dk">Dokonany · совершенный</span>
+    <span class="badge badge-cnt">100 пар</span>
+  </div>
+</header>
+
+<!-- THEORY -->
+<section class="theory">
+  <div class="section-heading">Теория</div>
+  <div class="theory-grid">
+    <div class="theory-card t-ndk">
+      <h3>Несовершенный вид</h3>
+      <div class="pl-name">ASPEKT NIEDOKONANY</div>
+      <ul>
+        <li>Процесс в ходе, без конца</li>
+        <li>Повторяющееся действие</li>
+        <li>Состояние / привычка</li>
+        <li>Образует настоящее время</li>
+        <li>Будущее сложное: <em>będę czytać</em></li>
+      </ul>
+    </div>
+    <div class="theory-card t-dk">
+      <h3>Совершенный вид</h3>
+      <div class="pl-name">ASPEKT DOKONANY</div>
+      <ul>
+        <li>Действие завершено, есть результат</li>
+        <li>Однократное действие</li>
+        <li>Нет настоящего времени</li>
+        <li>Будущее простое: <em>przeczytam</em></li>
+        <li>Всегда конкретный момент</li>
+      </ul>
+    </div>
+  </div>
+  <div class="formation-block">
+    <h3>Как образуются пары</h3>
+    <div class="formation-ways">
+      <div class="fway">
+        <div class="fway-title">Приставка (префикс)</div>
+        <div class="fway-ex">
+          pisać → na<strong>pisać</strong><br>
+          <span>писать → написать</span><br>
+          robić → z<strong>robić</strong><br>
+          <span>делать → сделать</span>
+        </div>
+      </div>
+      <div class="fway">
+        <div class="fway-title">Смена суффикса</div>
+        <div class="fway-ex">
+          kup<strong>ić</strong> → kup<strong>ować</strong><br>
+          <span>купить → покупать</span><br>
+          otwor<strong>zyć</strong> → otw<strong>ierać</strong><br>
+          <span>открыть → открывать</span>
+        </div>
+      </div>
+      <div class="fway">
+        <div class="fway-title">Разные корни</div>
+        <div class="fway-ex">
+          mówić → powie<strong>dzieć</strong><br>
+          <span>говорить → сказать</span><br>
+          brać → wziąć<br>
+          <span>брать → взять</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Поиск по польскому или русскому..." oninput="filterVerbs()">
+  </div>
+  <div class="filter-btns">
+    <button class="filter-btn active" onclick="setFilter('all', this)">Все</button>
+    <button class="filter-btn" onclick="setFilter('prefix', this)">Приставка</button>
+    <button class="filter-btn" onclick="setFilter('suffix', this)">Суффикс</button>
+    <button class="filter-btn" onclick="setFilter('suppl', this)">Разные корни</button>
+  </div>
+  <span class="count-label" id="countLabel">100 / 100</span>
+</div>
+
+<!-- TABLE -->
+<div class="table-wrap">
+  <div class="col-headers">
+    <div class="col-h">#</div>
+    <div class="col-h">Несовершенный · Niedokonany</div>
+    <div class="col-h">Совершенный · Dokonany</div>
+    <div class="col-h">Образование</div>
+  </div>
+  <div id="verbList"></div>
+  <div class="no-results" id="noResults">Ничего не найдено</div>
+</div>
+
+<footer>
+  <span>Aspekty czasowników polskich · 100 par</span>
+  <span>aspekt niedokonany &amp; dokonany</span>
+</footer>
+
+<script>
+const verbs = [
+  // — ДВИЖЕНИЕ И ПЕРЕМЕЩЕНИЕ —
+  { ndk:"iść",       ndk_ru:"идти",        dk:"pójść",       dk_ru:"пойти",         type:"suppl",
+    ex_ndk:["Idę do sklepu.", "Я иду в магазин (сейчас, процесс)."],
+    ex_dk: ["Poszłam do sklepu po chleb.", "Я пошла в магазин за хлебом (однократно, факт)."] },
+  { ndk:"chodzić",   ndk_ru:"ходить (регулярно)", dk:"pójść",  dk_ru:"пойти",        type:"suppl",
+    ex_ndk:["Chodzę do pracy piechotą.", "Я хожу на работу пешком (привычка)."],
+    ex_dk: ["Pójdę jutro do lekarza.", "Я пойду завтра к врачу."] },
+  { ndk:"jechać",    ndk_ru:"ехать",        dk:"pojechać",    dk_ru:"поехать",       type:"prefix",
+    ex_ndk:["Jadę do Warszawy.", "Я еду в Варшаву (сейчас)."],
+    ex_dk: ["Pojechałem do Krakowa na weekend.", "Я поехал в Краков на выходные."] },
+  { ndk:"jeździć",   ndk_ru:"ездить",       dk:"pojechać",    dk_ru:"поехать",       type:"suppl",
+    ex_ndk:["Jeżdżę do babci co miesiąc.", "Я езжу к бабушке каждый месяц."],
+    ex_dk: ["Pojechałam do Gdańska.", "Я поехала в Гданьск."] },
+  { ndk:"wracać",    ndk_ru:"возвращаться", dk:"wrócić",      dk_ru:"вернуться",     type:"suffix",
+    ex_ndk:["Wracam do domu późno.", "Я возвращаюсь домой поздно (обычно)."],
+    ex_dk: ["Wróciłem o północy.", "Я вернулся в полночь."] },
+  { ndk:"wychodzić", ndk_ru:"выходить",     dk:"wyjść",       dk_ru:"выйти",         type:"suppl",
+    ex_ndk:["Wychodzę z biura o 17.", "Я выхожу из офиса в 17 (регулярно)."],
+    ex_dk: ["Wyszłam z domu za wcześnie.", "Я вышла из дома слишком рано."] },
+  { ndk:"wchodzić",  ndk_ru:"входить",      dk:"wejść",       dk_ru:"войти",         type:"suppl",
+    ex_ndk:["Wchodzę po schodach.", "Я поднимаюсь по лестнице (процесс)."],
+    ex_dk: ["Wszedłem do pokoju.", "Я вошёл в комнату."] },
+  { ndk:"przyjeżdżać", ndk_ru:"приезжать", dk:"przyjechać",  dk_ru:"приехать",      type:"suffix",
+    ex_ndk:["Przyjeżdża do nas co roku.", "Он приезжает к нам каждый год."],
+    ex_dk: ["Przyjechała wczoraj.", "Она приехала вчера."] },
+  { ndk:"odchodzić", ndk_ru:"уходить",      dk:"odejść",      dk_ru:"уйти",          type:"suppl",
+    ex_ndk:["Odchodzi z pracy o 15.", "Он уходит с работы в 15."],
+    ex_dk: ["Odeszłam bez słowa.", "Я ушла без слова."] },
+  { ndk:"biegać",    ndk_ru:"бегать",       dk:"pobiec",      dk_ru:"побежать",      type:"suppl",
+    ex_ndk:["Biegam każdego ranka.", "Я бегаю каждое утро."],
+    ex_dk: ["Pobiegłem na autobus.", "Я побежал за автобусом."] },
+
+  // — РЕЧЬ И КОММУНИКАЦИЯ —
+  { ndk:"mówić",     ndk_ru:"говорить",     dk:"powiedzieć",  dk_ru:"сказать",       type:"suppl",
+    ex_ndk:["Mówię po polsku.", "Я говорю по-польски."],
+    ex_dk: ["Powiedział mi prawdę.", "Он сказал мне правду."] },
+  { ndk:"pytać",     ndk_ru:"спрашивать",   dk:"zapytać",     dk_ru:"спросить",      type:"prefix",
+    ex_ndk:["Zawsze pyta o oceny.", "Он всегда спрашивает об оценках."],
+    ex_dk: ["Zapytałam o godzinę.", "Я спросила который час."] },
+  { ndk:"odpowiadać",ndk_ru:"отвечать",     dk:"odpowiedzieć",dk_ru:"ответить",      type:"suffix",
+    ex_ndk:["Odpowiada na e-maile rano.", "Он отвечает на письма утром."],
+    ex_dk: ["Odpowiedziała krótko.", "Она ответила кратко."] },
+  { ndk:"prosić",    ndk_ru:"просить",      dk:"poprosić",    dk_ru:"попросить",     type:"prefix",
+    ex_ndk:["Prosi mnie o pomoc codziennie.", "Он каждый день просит меня о помощи."],
+    ex_dk: ["Poprosiłam o rachunek.", "Я попросила счёт."] },
+  { ndk:"tłumaczyć", ndk_ru:"объяснять/переводить", dk:"wytłumaczyć", dk_ru:"объяснить", type:"prefix",
+    ex_ndk:["Tłumaczy tekst.", "Он переводит текст (процесс)."],
+    ex_dk: ["Wytłumaczyłem mu zasady.", "Я объяснил ему правила."] },
+  { ndk:"opowiadać", ndk_ru:"рассказывать", dk:"opowiedzieć", dk_ru:"рассказать",    type:"suffix",
+    ex_ndk:["Opowiada mi o swojej podróży.", "Он рассказывает мне о своём путешествии."],
+    ex_dk: ["Opowiedziałam jej wszystko.", "Я рассказала ей всё."] },
+  { ndk:"rozmawiać", ndk_ru:"разговаривать",dk:"porozmawiać", dk_ru:"поговорить",    type:"prefix",
+    ex_ndk:["Rozmawiamy przez telefon.", "Мы разговариваем по телефону."],
+    ex_dk: ["Porozmawiamy o tym jutro.", "Мы поговорим об этом завтра."] },
+  { ndk:"dzwonić",   ndk_ru:"звонить",      dk:"zadzwonić",   dk_ru:"позвонить",     type:"prefix",
+    ex_ndk:["Dzwoni do mamy co wieczór.", "Он звонит маме каждый вечер."],
+    ex_dk: ["Zadzwoniłam do niej.", "Я позвонила ей."] },
+  { ndk:"śmiać się", ndk_ru:"смеяться",     dk:"roześmiać się",dk_ru:"рассмеяться",  type:"prefix",
+    ex_ndk:["Śmieje się z każdego żartu.", "Он смеётся над каждой шуткой."],
+    ex_dk: ["Roześmiała się głośno.", "Она громко рассмеялась."] },
+  { ndk:"krzyczać",  ndk_ru:"кричать",      dk:"krzyknąć",    dk_ru:"крикнуть",      type:"suffix",
+    ex_ndk:["Krzyczy na dzieci.", "Он кричит на детей (привычка)."],
+    ex_dk: ["Krzyknęła z bólu.", "Она крикнула от боли."] },
+
+  // — ЧТЕНИЕ, ПИСЬМО, УЧЁБА —
+  { ndk:"czytać",    ndk_ru:"читать",       dk:"przeczytać",  dk_ru:"прочитать",     type:"prefix",
+    ex_ndk:["Czytam książkę.", "Я читаю книгу (сейчас)."],
+    ex_dk: ["Przeczytałem cały artykuł.", "Я прочитал всю статью."] },
+  { ndk:"pisać",     ndk_ru:"писать",       dk:"napisać",     dk_ru:"написать",      type:"prefix",
+    ex_ndk:["Piszę list do przyjaciela.", "Я пишу письмо другу."],
+    ex_dk: ["Napisałam pracę domową.", "Я написала домашнюю работу."] },
+  { ndk:"uczyć się", ndk_ru:"учиться",      dk:"nauczyć się", dk_ru:"выучить / научиться", type:"prefix",
+    ex_ndk:["Uczę się polskiego.", "Я учу польский (в процессе)."],
+    ex_dk: ["Nauczyłam się słówek.", "Я выучила слова (результат)."] },
+  { ndk:"uczyć",     ndk_ru:"учить (кого-то)", dk:"nauczyć", dk_ru:"научить",       type:"prefix",
+    ex_ndk:["Uczy dzieci matematyki.", "Он учит детей математике."],
+    ex_dk: ["Nauczyłem go grać w szachy.", "Я научил его играть в шахматы."] },
+  { ndk:"studiować", ndk_ru:"учиться в вузе", dk:"przestudiować", dk_ru:"изучить / проработать", type:"prefix",
+    ex_ndk:["Studiuje na Uniwersytecie.", "Он учится в университете."],
+    ex_dk: ["Przestudiowałam cały materiał.", "Я проработала весь материал."] },
+  { ndk:"liczyć",    ndk_ru:"считать",      dk:"policzyć",    dk_ru:"посчитать",     type:"prefix",
+    ex_ndk:["Liczy pieniądze.", "Он считает деньги (процесс)."],
+    ex_dk: ["Policzyłam wszystkich gości.", "Я посчитала всех гостей."] },
+
+  // — ДОМАШНИЕ ДЕЛА —
+  { ndk:"robić",     ndk_ru:"делать",       dk:"zrobić",      dk_ru:"сделать",       type:"prefix",
+    ex_ndk:["Robię zadanie domowe.", "Я делаю домашнее задание."],
+    ex_dk: ["Zrobiłem wszystko na czas.", "Я всё сделал вовремя."] },
+  { ndk:"gotować",   ndk_ru:"готовить",     dk:"ugotować",    dk_ru:"приготовить",   type:"prefix",
+    ex_ndk:["Gotuję obiad.", "Я готовлю обед (сейчас)."],
+    ex_dk: ["Ugotowałam zupę.", "Я приготовила суп (готово)."] },
+  { ndk:"sprzątać",  ndk_ru:"убирать",      dk:"posprzątać",  dk_ru:"убрать",        type:"prefix",
+    ex_ndk:["Sprzątam w soboty.", "Я убираю по субботам."],
+    ex_dk: ["Posprzątałam pokój.", "Я убрала комнату."] },
+  { ndk:"myć",       ndk_ru:"мыть",         dk:"umyć",        dk_ru:"помыть",        type:"prefix",
+    ex_ndk:["Myje ręce przed jedzeniem.", "Он моет руки перед едой."],
+    ex_dk: ["Umyłam naczynia.", "Я помыла посуду."] },
+  { ndk:"prać",      ndk_ru:"стирать",      dk:"wyprać",      dk_ru:"постирать",     type:"prefix",
+    ex_ndk:["Piorę w piątek.", "Я стираю по пятницам."],
+    ex_dk: ["Wyprałam wszystkie ubrania.", "Я постирала всю одежду."] },
+  { ndk:"otwierać",  ndk_ru:"открывать",    dk:"otworzyć",    dk_ru:"открыть",       type:"suffix",
+    ex_ndk:["Otwieramy sklep o 9.", "Мы открываем магазин в 9."],
+    ex_dk: ["Otworzyłem drzwi.", "Я открыл дверь."] },
+  { ndk:"zamykać",   ndk_ru:"закрывать",    dk:"zamknąć",     dk_ru:"закрыть",       type:"suffix",
+    ex_ndk:["Zamykam okno na noc.", "Я закрываю окно на ночь."],
+    ex_dk: ["Zamknął sklep o 20.", "Он закрыл магазин в 20."] },
+  { ndk:"włączać",   ndk_ru:"включать",     dk:"włączyć",     dk_ru:"включить",      type:"suffix",
+    ex_ndk:["Włączam komputer rano.", "Я включаю компьютер утром."],
+    ex_dk: ["Włączyłam radio.", "Я включила радио."] },
+  { ndk:"wyłączać",  ndk_ru:"выключать",    dk:"wyłączyć",    dk_ru:"выключить",     type:"suffix",
+    ex_ndk:["Wyłączaj światło!", "Выключай свет! (всегда делай)"],
+    ex_dk: ["Wyłączyłem alarm.", "Я выключил будильник."] },
+  { ndk:"spać",      ndk_ru:"спать",        dk:"zasnąć",      dk_ru:"заснуть",       type:"suppl",
+    ex_ndk:["Śpi osiem godzin.", "Он спит восемь часов."],
+    ex_dk: ["Zasnęłam od razu.", "Я заснула сразу."] },
+
+  // — ЕДА И ПОКУПКИ —
+  { ndk:"jeść",      ndk_ru:"есть (кушать)", dk:"zjeść",      dk_ru:"съесть",        type:"prefix",
+    ex_ndk:["Jem śniadanie powoli.", "Я ем завтрак медленно."],
+    ex_dk: ["Zjadłam cały obiad.", "Я съела весь обед."] },
+  { ndk:"pić",       ndk_ru:"пить",         dk:"wypić",       dk_ru:"выпить",        type:"prefix",
+    ex_ndk:["Piję kawę co rano.", "Я пью кофе каждое утро."],
+    ex_dk: ["Wypiłem szklankę wody.", "Я выпил стакан воды."] },
+  { ndk:"kupować",   ndk_ru:"покупать",     dk:"kupić",       dk_ru:"купить",        type:"suffix",
+    ex_ndk:["Kupuję warzywa na targu.", "Я покупаю овощи на рынке."],
+    ex_dk: ["Kupiłam nową sukienkę.", "Я купила новое платье."] },
+  { ndk:"gotować",   ndk_ru:"готовить (пищу)", dk:"przygotować", dk_ru:"подготовить", type:"prefix",
+    ex_ndk:["Gotuje dla rodziny.", "Она готовит для семьи."],
+    ex_dk: ["Przygotowałem kolację.", "Я приготовил ужин."] },
+  { ndk:"smażyć",    ndk_ru:"жарить",       dk:"usmażyć",     dk_ru:"пожарить",      type:"prefix",
+    ex_ndk:["Smaży jajka.", "Он жарит яйца (процесс)."],
+    ex_dk: ["Usmażyłam naleśniki.", "Я поджарила блины."] },
+  { ndk:"płacić",    ndk_ru:"платить",      dk:"zapłacić",    dk_ru:"заплатить",     type:"prefix",
+    ex_ndk:["Płaci kartą.", "Он платит картой (обычно)."],
+    ex_dk: ["Zapłaciłam za obiad.", "Я заплатила за обед."] },
+
+  // — ЧУВСТВА И ВОСПРИЯТИЕ —
+  { ndk:"widzieć",   ndk_ru:"видеть",       dk:"zobaczyć",    dk_ru:"увидеть",       type:"suppl",
+    ex_ndk:["Widzę go codziennie.", "Я вижу его каждый день."],
+    ex_dk: ["Zobaczyłem go na ulicy.", "Я увидел его на улице."] },
+  { ndk:"słyszeć",   ndk_ru:"слышать",      dk:"usłyszeć",    dk_ru:"услышать",      type:"prefix",
+    ex_ndk:["Słyszę muzykę z góry.", "Я слышу музыку сверху."],
+    ex_dk: ["Usłyszałam dziwny hałas.", "Я услышала странный шум."] },
+  { ndk:"czuć",      ndk_ru:"чувствовать",  dk:"poczuć",      dk_ru:"почувствовать", type:"prefix",
+    ex_ndk:["Czuję zapach kawy.", "Я чувствую запах кофе."],
+    ex_dk: ["Poczułam ból.", "Я почувствовала боль."] },
+  { ndk:"kochać",    ndk_ru:"любить",       dk:"pokochać",    dk_ru:"полюбить",      type:"prefix",
+    ex_ndk:["Kocham cię.", "Я тебя люблю (состояние)."],
+    ex_dk: ["Pokochałem ją od pierwszego wejrzenia.", "Я полюбил её с первого взгляда."] },
+  { ndk:"lubić",     ndk_ru:"нравиться / любить (нравится)", dk:"polubić", dk_ru:"полюбить / понравиться", type:"prefix",
+    ex_ndk:["Lubię muzykę jazzową.", "Я люблю джаз."],
+    ex_dk: ["Polubiłam go od razu.", "Он мне сразу понравился."] },
+  { ndk:"pamiętać",  ndk_ru:"помнить",      dk:"zapamiętać",  dk_ru:"запомнить",     type:"prefix",
+    ex_ndk:["Pamiętam wszystkie daty.", "Я помню все даты."],
+    ex_dk: ["Zapamiętałam jego twarz.", "Я запомнила его лицо."] },
+  { ndk:"zapominać", ndk_ru:"забывать",     dk:"zapomnieć",   dk_ru:"забыть",        type:"suffix",
+    ex_ndk:["Zapominam kluczy co rano.", "Я каждое утро забываю ключи."],
+    ex_dk: ["Zapomniałam jego imienia.", "Я забыла его имя."] },
+
+  // — РАБОТА И ДЕЙСТВИЯ —
+  { ndk:"pracować",  ndk_ru:"работать",     dk:"przepracować", dk_ru:"отработать",   type:"prefix",
+    ex_ndk:["Pracuję od 9 do 17.", "Я работаю с 9 до 17."],
+    ex_dk: ["Przepracowałem 10 lat w tej firmie.", "Я отработал 10 лет в этой фирме."] },
+  { ndk:"pomagać",   ndk_ru:"помогать",     dk:"pomóc",       dk_ru:"помочь",        type:"suppl",
+    ex_ndk:["Pomagam mamie w kuchni.", "Я помогаю маме на кухне."],
+    ex_dk: ["Pomogłam jej z walizką.", "Я помогла ей с чемоданом."] },
+  { ndk:"szukać",    ndk_ru:"искать",       dk:"znaleźć",     dk_ru:"найти",         type:"suppl",
+    ex_ndk:["Szukam kluczy.", "Я ищу ключи (процесс)."],
+    ex_dk: ["Znalazłem portfel.", "Я нашёл кошелёк."] },
+  { ndk:"budować",   ndk_ru:"строить",      dk:"zbudować",    dk_ru:"построить",     type:"prefix",
+    ex_ndk:["Budują nowy most.", "Они строят новый мост."],
+    ex_dk: ["Zbudowali dom w rok.", "Они построили дом за год."] },
+  { ndk:"naprawiać", ndk_ru:"ремонтировать / чинить", dk:"naprawić", dk_ru:"починить", type:"suffix",
+    ex_ndk:["Naprawia samochody.", "Он ремонтирует машины."],
+    ex_dk: ["Naprawiłam rower.", "Я починила велосипед."] },
+  { ndk:"zmieniać",  ndk_ru:"менять / изменять", dk:"zmienić", dk_ru:"изменить",    type:"suffix",
+    ex_ndk:["Zmienia zdanie co chwilę.", "Он меняет мнение каждую минуту."],
+    ex_dk: ["Zmieniłam pracę.", "Я сменила работу."] },
+  { ndk:"kończyć",   ndk_ru:"заканчивать",  dk:"skończyć",    dk_ru:"закончить",     type:"prefix",
+    ex_ndk:["Kończę pracę o 18.", "Я заканчиваю работу в 18."],
+    ex_dk: ["Skończyłam projekt.", "Я закончила проект."] },
+  { ndk:"zaczynać",  ndk_ru:"начинать",     dk:"zacząć",      dk_ru:"начать",        type:"suffix",
+    ex_ndk:["Zaczynam dzień od kawy.", "Я начинаю день с кофе."],
+    ex_dk: ["Zaczęłam nową książkę.", "Я начала новую книгу."] },
+  { ndk:"wysyłać",   ndk_ru:"отправлять",   dk:"wysłać",      dk_ru:"отправить",     type:"suffix",
+    ex_ndk:["Wysyłam raporty co tydzień.", "Я отправляю отчёты каждую неделю."],
+    ex_dk: ["Wysłałem e-mail.", "Я отправил письмо."] },
+  { ndk:"otrzymywać",ndk_ru:"получать",     dk:"otrzymać",    dk_ru:"получить",      type:"suffix",
+    ex_ndk:["Otrzymuję pensję co miesiąc.", "Я получаю зарплату каждый месяц."],
+    ex_dk: ["Otrzymałam nagrodę.", "Я получила награду."] },
+
+  // — ДАВАТЬ И БРАТЬ —
+  { ndk:"dawać",     ndk_ru:"давать",       dk:"dać",         dk_ru:"дать",          type:"suppl",
+    ex_ndk:["Daje dzieciom kieszonkowe.", "Он даёт детям карманные деньги."],
+    ex_dk: ["Dałam jej swój numer.", "Я дала ей свой номер."] },
+  { ndk:"brać",      ndk_ru:"брать",        dk:"wziąć",       dk_ru:"взять",         type:"suppl",
+    ex_ndk:["Bierze lekarstwa codziennie.", "Он принимает лекарства каждый день."],
+    ex_dk: ["Wzięłam parasolkę.", "Я взяла зонтик."] },
+  { ndk:"oddawać",   ndk_ru:"отдавать / возвращать", dk:"oddać", dk_ru:"отдать / вернуть", type:"suffix",
+    ex_ndk:["Oddaje długi powoli.", "Он медленно отдаёт долги."],
+    ex_dk: ["Oddałam książkę do biblioteki.", "Я вернула книгу в библиотеку."] },
+  { ndk:"przynosić", ndk_ru:"приносить",    dk:"przynieść",   dk_ru:"принести",      type:"suffix",
+    ex_ndk:["Przynosi kwiaty co piątek.", "Он приносит цветы каждую пятницу."],
+    ex_dk: ["Przyniosłam herbatę.", "Я принесла чай."] },
+  { ndk:"zabierać",  ndk_ru:"забирать",     dk:"zabrać",      dk_ru:"забрать",       type:"suffix",
+    ex_ndk:["Zabiera dzieci ze szkoły.", "Он забирает детей из школы."],
+    ex_dk: ["Zabrałam swoje rzeczy.", "Я забрала свои вещи."] },
+
+  // — ПОКАЗЫВАТЬ, ВИДЕТЬ, СМОТРЕТЬ —
+  { ndk:"oglądać",   ndk_ru:"смотреть",     dk:"obejrzeć",    dk_ru:"посмотреть",    type:"suppl",
+    ex_ndk:["Oglądam filmy w weekend.", "Я смотрю фильмы в выходные."],
+    ex_dk: ["Obejrzałam nowy serial.", "Я посмотрела новый сериал."] },
+  { ndk:"pokazywać", ndk_ru:"показывать",   dk:"pokazać",     dk_ru:"показать",      type:"suffix",
+    ex_ndk:["Pokazuje mi zdjęcia.", "Он показывает мне фотографии."],
+    ex_dk: ["Pokazałam jej miasto.", "Я показала ей город."] },
+  { ndk:"patrzeć",   ndk_ru:"смотреть / глядеть", dk:"popatrzeć", dk_ru:"посмотреть / поглядеть", type:"prefix",
+    ex_ndk:["Patrzy przez okno.", "Он смотрит в окно."],
+    ex_dk: ["Popatrzyłam na niego.", "Я посмотрела на него."] },
+  { ndk:"rozumieć",  ndk_ru:"понимать",     dk:"zrozumieć",   dk_ru:"понять",        type:"prefix",
+    ex_ndk:["Rozumiem po polsku.", "Я понимаю по-польски."],
+    ex_dk: ["Zrozumiałam problem.", "Я поняла проблему."] },
+  { ndk:"myśleć",    ndk_ru:"думать",       dk:"pomyśleć",    dk_ru:"подумать",      type:"prefix",
+    ex_ndk:["Myślę o wakacjach.", "Я думаю об отпуске."],
+    ex_dk: ["Pomyślałam o nowym planie.", "Я подумала о новом плане."] },
+
+  // — СОЦИАЛЬНОЕ —
+  { ndk:"spotykać",  ndk_ru:"встречать",    dk:"spotkać",     dk_ru:"встретить",     type:"suffix",
+    ex_ndk:["Spotykam go co tydzień.", "Я встречаю его каждую неделю."],
+    ex_dk: ["Spotkałam starą przyjaciółkę.", "Я встретила старую подругу."] },
+  { ndk:"zapraszać", ndk_ru:"приглашать",   dk:"zaprosić",    dk_ru:"пригласить",    type:"suffix",
+    ex_ndk:["Zawsze zaprasza nas na obiad.", "Он всегда приглашает нас на обед."],
+    ex_dk: ["Zaprosiłam ją na imprezę.", "Я пригласила её на вечеринку."] },
+  { ndk:"odwiedzać", ndk_ru:"навещать / посещать", dk:"odwiedzić", dk_ru:"навестить", type:"suffix",
+    ex_ndk:["Odwiedzamy dziadków co miesiąc.", "Мы навещаем дедушку с бабушкой каждый месяц."],
+    ex_dk: ["Odwiedziłam przyjaciółkę w szpitalu.", "Я навестила подругу в больнице."] },
+  { ndk:"żegnać się",ndk_ru:"прощаться",    dk:"pożegnać się",dk_ru:"попрощаться",   type:"prefix",
+    ex_ndk:["Żegna się długo.", "Он прощается долго."],
+    ex_dk: ["Pożegnałam się z gośćmi.", "Я попрощалась с гостями."] },
+  { ndk:"witać",     ndk_ru:"приветствовать", dk:"przywitać", dk_ru:"поприветствовать", type:"prefix",
+    ex_ndk:["Wita wszystkich uśmiechem.", "Она встречает всех с улыбкой."],
+    ex_dk: ["Przywitałam go ciepło.", "Я тепло его встретила."] },
+
+  // — ФИЗИЧЕСКИЕ ДЕЙСТВИЯ —
+  { ndk:"podnosić",  ndk_ru:"поднимать",    dk:"podnieść",    dk_ru:"поднять",       type:"suffix",
+    ex_ndk:["Podnosi ciężary na siłowni.", "Он поднимает тяжести в зале."],
+    ex_dk: ["Podniosłam torbę z podłogi.", "Я подняла сумку с пола."] },
+  { ndk:"kłaść",     ndk_ru:"класть",       dk:"położyć",     dk_ru:"положить",      type:"suppl",
+    ex_ndk:["Kładzie wszystko wszędzie.", "Он кладёт всё везде (привычка)."],
+    ex_dk: ["Położyłam klucze na stole.", "Я положила ключи на стол."] },
+  { ndk:"siadać",    ndk_ru:"садиться",     dk:"siąść",       dk_ru:"сесть",         type:"suppl",
+    ex_ndk:["Siada zawsze przy oknie.", "Он всегда садится у окна."],
+    ex_dk: ["Usiadłam na ławce.", "Я села на скамейку."] },
+  { ndk:"wstawać",   ndk_ru:"вставать",     dk:"wstać",       dk_ru:"встать",        type:"suffix",
+    ex_ndk:["Wstaję o siódmej.", "Я встаю в семь."],
+    ex_dk: ["Wstałam wcześniej niż zwykle.", "Я встала раньше, чем обычно."] },
+  { ndk:"padać",     ndk_ru:"падать",       dk:"upaść",       dk_ru:"упасть",        type:"suppl",
+    ex_ndk:["Pada deszcz.", "Идёт дождь."],
+    ex_dk: ["Upadłam na lodzie.", "Я упала на льду."] },
+  { ndk:"rzucać",    ndk_ru:"бросать",      dk:"rzucić",      dk_ru:"бросить",       type:"suffix",
+    ex_ndk:["Rzuca piłkę dziecku.", "Он бросает ребёнку мяч."],
+    ex_dk: ["Rzuciłam torbę na podłogę.", "Я бросила сумку на пол."] },
+  { ndk:"łapać",     ndk_ru:"ловить",       dk:"złapać",      dk_ru:"поймать",       type:"prefix",
+    ex_ndk:["Łapie ryby codziennie.", "Он ловит рыбу каждый день."],
+    ex_dk: ["Złapałam taksówkę.", "Я поймала такси."] },
+  { ndk:"ciągnąć",   ndk_ru:"тянуть",       dk:"pociągnąć",   dk_ru:"потянуть",      type:"prefix",
+    ex_ndk:["Ciągnie psa na smyczy.", "Он тянет собаку на поводке."],
+    ex_dk: ["Pociągnęłam za rękę.", "Я потянула за руку."] },
+  { ndk:"pchać",     ndk_ru:"толкать",      dk:"pchnąć",      dk_ru:"толкнуть",      type:"suffix",
+    ex_ndk:["Pcha wózek.", "Она толкает коляску."],
+    ex_dk: ["Pchnęłam drzwi.", "Я толкнула дверь."] },
+
+  // — ПРИРОДА И СОСТОЯНИЯ —
+  { ndk:"rosnąć",    ndk_ru:"расти",        dk:"urosnąć",     dk_ru:"вырасти",       type:"prefix",
+    ex_ndk:["Drzewo rośnie szybko.", "Дерево растёт быстро."],
+    ex_dk: ["Urosłam przez wakacje.", "Я выросла за лето."] },
+  { ndk:"topnieć",   ndk_ru:"таять",        dk:"stopić się",  dk_ru:"растаять",      type:"suppl",
+    ex_ndk:["Śnieg topnieje w słońcu.", "Снег тает на солнце."],
+    ex_dk: ["Lód stopił się w szklance.", "Лёд растаял в стакане."] },
+
+  // — МЕДИЦИНА И ЗДОРОВЬЕ —
+  { ndk:"chorować",  ndk_ru:"болеть",       dk:"zachorować",  dk_ru:"заболеть",      type:"prefix",
+    ex_ndk:["Choruje każdą zimę.", "Он болеет каждую зиму."],
+    ex_dk: ["Zachorowałam na grypę.", "Я заболела гриппом."] },
+  { ndk:"leczyć",    ndk_ru:"лечить",       dk:"wyleczyć",    dk_ru:"вылечить",      type:"prefix",
+    ex_ndk:["Leczy pacjentów od lat.", "Он лечит пациентов много лет."],
+    ex_dk: ["Wyleczyłam infekcję.", "Я вылечила инфекцию."] },
+  { ndk:"boleć",     ndk_ru:"болеть (о боли)", dk:"rozbolić", dk_ru:"разболеться",   type:"prefix",
+    ex_ndk:["Boli mnie głowa.", "У меня болит голова."],
+    ex_dk: ["Rozbolały mnie nogi.", "У меня разболелись ноги."] },
+
+  // — РАЗНОЕ —
+  { ndk:"decydować", ndk_ru:"решать",       dk:"zdecydować",  dk_ru:"решить (принять решение)", type:"prefix",
+    ex_ndk:["Decyduje sam.", "Он решает сам."],
+    ex_dk: ["Zdecydowałam się zostać.", "Я решила остаться."] },
+  { ndk:"planować",  ndk_ru:"планировать",  dk:"zaplanować",  dk_ru:"запланировать", type:"prefix",
+    ex_ndk:["Planuję urlop.", "Я планирую отпуск."],
+    ex_dk: ["Zaplanowałam spotkanie.", "Я запланировала встречу."] },
+  { ndk:"tracić",    ndk_ru:"терять",       dk:"stracić",     dk_ru:"потерять",      type:"prefix",
+    ex_ndk:["Traci czas na głupoty.", "Он тратит время на глупости."],
+    ex_dk: ["Straciłam portfel.", "Я потеряла кошелёк."] },
+  { ndk:"wygrywać",  ndk_ru:"выигрывать",   dk:"wygrać",      dk_ru:"выиграть",      type:"suffix",
+    ex_ndk:["Zawsze wygrywa w karty.", "Он всегда выигрывает в карты."],
+    ex_dk: ["Wygrałam konkurs.", "Я выиграла конкурс."] },
+  { ndk:"przegrywać",ndk_ru:"проигрывать",  dk:"przegrać",    dk_ru:"проиграть",     type:"suffix",
+    ex_ndk:["Przegrywa z powodu błędów.", "Он проигрывает из-за ошибок."],
+    ex_dk: ["Przegraliśmy mecz.", "Мы проиграли матч."] },
+  { ndk:"śpiewać",   ndk_ru:"петь",         dk:"zaśpiewać",   dk_ru:"спеть",         type:"prefix",
+    ex_ndk:["Śpiewa w chórze.", "Она поёт в хоре."],
+    ex_dk: ["Zaśpiewała nam piosenkę.", "Она спела нам песню."] },
+  { ndk:"tańczyć",   ndk_ru:"танцевать",    dk:"zatańczyć",   dk_ru:"потанцевать",   type:"prefix",
+    ex_ndk:["Tańczy flamenco.", "Она танцует фламенко."],
+    ex_dk: ["Zatańczyliśmy razem.", "Мы потанцевали вместе."] },
+  { ndk:"płakać",    ndk_ru:"плакать",      dk:"zapłakać",    dk_ru:"заплакать",     type:"prefix",
+    ex_ndk:["Płacze przy smutnych filmach.", "Она плачет на грустных фильмах."],
+    ex_dk: ["Zapłakałam ze szczęścia.", "Я заплакала от счастья."] },
+  { ndk:"czekać",    ndk_ru:"ждать",        dk:"poczekać",    dk_ru:"подождать",     type:"prefix",
+    ex_ndk:["Czekam na wyniki.", "Я жду результатов."],
+    ex_dk: ["Poczekaj chwilę!", "Подожди минуту!"] },
+  { ndk:"spóźniać się", ndk_ru:"опаздывать", dk:"spóźnić się", dk_ru:"опоздать",    type:"suffix",
+    ex_ndk:["Spóźnia się na każde spotkanie.", "Он опаздывает на каждую встречу."],
+    ex_dk: ["Spóźniłam się na pociąg.", "Я опоздала на поезд."] },
+  { ndk:"kończyć się", ndk_ru:"заканчиваться", dk:"skończyć się", dk_ru:"закончиться", type:"prefix",
+    ex_ndk:["Film kończy się o 23.", "Фильм заканчивается в 23."],
+    ex_dk: ["Skończyło się mleko.", "Молоко закончилось."] },
+  { ndk:"zaczynać się", ndk_ru:"начинаться", dk:"zacząć się",  dk_ru:"начаться",     type:"suffix",
+    ex_ndk:["Lekcja zaczyna się o 8.", "Урок начинается в 8."],
+    ex_dk: ["Zaczął się deszcz.", "Начался дождь."] },
+  { ndk:"mieszkać",  ndk_ru:"жить / проживать", dk:"zamieszkać", dk_ru:"поселиться", type:"prefix",
+    ex_ndk:["Mieszkam w Berlinie.", "Я живу в Берлине."],
+    ex_dk: ["Zamieszkałam w nowym mieszkaniu.", "Я поселилась в новой квартире."] },
+];
+
+let activeFilter = 'all';
+
+function renderVerbs(list) {
+  const container = document.getElementById('verbList');
+  const noR = document.getElementById('noResults');
+  container.innerHTML = '';
+  if (list.length === 0) { noR.style.display = 'block'; return; }
+  noR.style.display = 'none';
+
+  list.forEach((v, i) => {
+    const typeLabel = v.type === 'prefix' ? 'Приставка' : v.type === 'suffix' ? 'Суффикс' : 'Разные корни';
+    const typeCls = 'tag-' + v.type;
+
+    const row = document.createElement('div');
+    row.className = 'verb-row';
+    row.innerHTML = `
+      <div class="row-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="cell cell-ndk">
+        <div class="word">${v.ndk}</div>
+        <div class="trans">${v.ndk_ru}</div>
+      </div>
+      <div class="cell cell-dk">
+        <div class="word">${v.dk}</div>
+        <div class="trans">${v.dk_ru}</div>
+      </div>
+      <div class="cell cell-type">
+        <span class="type-tag ${typeCls}">${typeLabel}</span>
+      </div>
+      <div class="examples-row">
+        <div class="ex-pair">
+          <div class="ex-card ex-ndk">
+            <div class="ex-label">Несов. · Niedokonany</div>
+            <div class="ex-pl">${v.ex_ndk[0]}</div>
+            <div class="ex-ru">${v.ex_ndk[1]}</div>
+          </div>
+          <div class="ex-card ex-dk">
+            <div class="ex-label">Сов. · Dokonany</div>
+            <div class="ex-pl">${v.ex_dk[0]}</div>
+            <div class="ex-ru">${v.ex_dk[1]}</div>
+          </div>
+        </div>
+      </div>
+    `;
+    row.addEventListener('click', () => {
+      const wasOpen = row.classList.contains('expanded');
+      document.querySelectorAll('.verb-row.expanded').forEach(r => r.classList.remove('expanded'));
+      if (!wasOpen) row.classList.add('expanded');
+    });
+    container.appendChild(row);
+  });
+  document.getElementById('countLabel').textContent = `${list.length} / ${verbs.length}`;
+}
+
+function getFiltered() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  return verbs.filter(v => {
+    const matchFilter = activeFilter === 'all' || v.type === activeFilter;
+    const matchSearch = !q || v.ndk.toLowerCase().includes(q) || v.dk.toLowerCase().includes(q)
+      || v.ndk_ru.toLowerCase().includes(q) || v.dk_ru.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+}
+
+function filterVerbs() { renderVerbs(getFiltered()); }
+
+function setFilter(type, btn) {
+  activeFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterVerbs();
+}
+
+renderVerbs(verbs);
+</script>
+</body>
+</html>
